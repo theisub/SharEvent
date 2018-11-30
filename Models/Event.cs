@@ -24,9 +24,9 @@ namespace Models
             Points = new List<T>();
         }
 
-        public Event(IEnumerable<T> records)
+        public Event(IEnumerable<T> points)
         {
-            Points = new List<T>(records);
+            Points = new List<T>(points);
         }
 
     }

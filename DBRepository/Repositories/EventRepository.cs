@@ -25,7 +25,7 @@ namespace DBRepository.Repositories
                 var query = context.GeoPoints.AsQueryable();
                 query = query.Where(p => p.EventId == eventId);
 
-                result.Points = await query.Include(p => p.EventId).OrderByDescending(p => p.PointId).Take(eventId).ToListAsync();
+                result.Points = await query.ToListAsync();
 
             }
             return result;
@@ -37,7 +37,7 @@ namespace DBRepository.Repositories
             using (var context = ContextFactory.CreateDbContext(ConnectionString))
             {
                 var temp = from p in context.GeoPoints select p;
-                return await context.GeoPoints.Select(e => e.EventId).Distinct().ToListAsync();
+                return await context.GeoPoints.Select(e => e.EventId).ToListAsync();
 
             }
 

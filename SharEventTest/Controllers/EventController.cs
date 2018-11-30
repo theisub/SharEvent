@@ -22,10 +22,10 @@ namespace SharEventTest.Controllers
 
         [Route("page")]
         [HttpGet]
-        public async Task<List<int>> GetAllPoints(int eventId)
+        public async Task<Event<GeoPoint>> GetAllPoints(int eventId)
         {
-            eventRepository.AddPoint(new GeoPoint { EventId = 3, PointLatitiude = 22, PointLongitude = 33 });
-            return await eventRepository.GetAllPoints(3);
+            //await eventRepository.AddPoint(new GeoPoint { EventId = 3, PointLatitiude = 22, PointLongitude = 33 });
+            return await eventRepository.GetPoints(3);
 
         }
 
