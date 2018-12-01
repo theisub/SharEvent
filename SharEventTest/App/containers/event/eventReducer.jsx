@@ -1,7 +1,7 @@
 ﻿import { GET_EVENT_SUCCESS, GET_EVENT_ERROR } from './eventConstants.jsx'
 
 const initialState = {
-    data: { currentPage: 3, totalPages: 3, pageSize: 3, points: [] },
+    data: { points: [] },
     error: ''
 }
 

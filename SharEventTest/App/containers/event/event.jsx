@@ -6,7 +6,7 @@ import { getEvents } from './eventActions.jsx';
 class Event extends React.Component {
 
     componentDidMount() {
-        this.props.getEvents(3);
+        this.props.getEvents();
     }
 
     render() {
@@ -14,8 +14,7 @@ class Event extends React.Component {
             return (
                 
                 <div key={item.eventId} className="event">
-                    <div className="header">Lat: {item.pointLatitiude} Lon: {item.pointLongitude} </div>
-                    <div className="content">{item.body}</div>
+                    <div value="point"> PointId: {item.pointId} Широта: {item.pointLatitiude} Долгота: {item.pointLongitude} </div>
                     <hr />
                 </div>
             );
