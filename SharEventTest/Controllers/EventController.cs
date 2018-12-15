@@ -24,7 +24,8 @@ namespace SharEventTest.Controllers
         [HttpGet]
         public async Task<Event<GeoPoint>> GetAllPoints(int eventId)
         {
-            //await eventRepository.AddPoint(new GeoPoint { EventId = 3, PointLatitiude = 22, PointLongitude = 33 });
+            //55.75, 37.57
+            //await eventRepository.AddPoint(new GeoPoint { EventId = 3, PointLatitiude = 55, PointLongitude = 37 });
             return await eventRepository.GetPoints(eventId);
 
         }

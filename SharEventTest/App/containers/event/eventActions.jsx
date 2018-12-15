@@ -16,7 +16,7 @@ export function errorReceive(err) {
     }
 }
 
-export function getEvents(eventId = 4) {
+export function getEvents(eventId = 3) {
     
 
     return (dispatch) => {
