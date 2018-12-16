@@ -73,7 +73,6 @@ export default class YandexApiMap extends React.Component {
 
         return (
             <div className="map">
-                <header className="map-header">
 
                     <Field addPoint={this.addPoint.bind(this)} />
 
@@ -98,7 +97,6 @@ export default class YandexApiMap extends React.Component {
 
 
                     <button onClick={this.priv}>{this.state.num}</button>
-                </header>
             </div>
         );
     }

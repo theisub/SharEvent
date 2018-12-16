@@ -1,5 +1,4 @@
 ﻿import { GET_EVENT_SUCCESS, GET_EVENT_ERROR } from './eventConstants.jsx';
-
 import "isomorphic-fetch"
 
 export function receiveEvents(data) {
@@ -17,8 +16,6 @@ export function errorReceive(err) {
 }
 
 export function getEvents(eventId = 3) {
-    
-
     return (dispatch) => {
         let queryTrailer = '?eventId=' + eventId;    
         fetch(constants.getPage + queryTrailer)
