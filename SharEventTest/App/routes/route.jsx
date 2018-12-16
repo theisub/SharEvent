@@ -4,6 +4,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 
 import About from '../containers/about/about.jsx';
 import Event from '../containers/event/event.jsx';
+import AddEventForm from '../containers/event/AddEventForm.jsx';
 import YandexApiMap from '../containers/map/ymap.jsx';
 
 export default class Routing extends React.Component {
@@ -12,8 +13,11 @@ export default class Routing extends React.Component {
             <main>
                 <Switch>
                     <Route path="/about" component={About} />
+
                     <Route path="/map" component={YandexApiMap} />
                     <Route path="/" component={Event} />
+                    <Route path="/add_event" component={AddEventForm} />
+
                 </Switch>
             </main>
         );

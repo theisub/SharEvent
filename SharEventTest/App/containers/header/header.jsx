@@ -4,8 +4,27 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import LoginForm from '../../components/loginForm.jsx';
 import { login, logout, showLoginForm, inputLogin, inputPassword } from './headerActions.jsx';
+import AddEventForm from '../../containers/event/AddEventForm.jsx'
 
 class Header extends React.Component {
+
+    constructor() {
+        super();
+        this.state = {
+            showAddEvent: false
+        };
+    }
+
+
+    togglePopup() {
+        this.setState({
+            showAddEvent: !this.state.showAddEvent
+        });
+    }
+
+
+
+
     render() {
         let newEventButton = this.props.header.isLogged ?
             <div className="menu">
@@ -45,9 +64,25 @@ class Header extends React.Component {
                         <li>
                             <Link to="/map">Покажи карту</Link>
                         </li>
+                        <li>
+                            <Link to="/add_event" onClick={this.togglePopup.bind(this)}> Добавить событие </Link>
+                                {
+                                    this.state.showAddEvent ?
+                                        <AddEventForm
+                                            text='Добавить событие'
+                                            closePopup={this.togglePopup.bind(this)}
+                                        />
+                                        : null
+                                }
+                        </li>
+                        
                     </ul>
                 </menu>
             </header>
+
+            
+
+
         );
     }
 };

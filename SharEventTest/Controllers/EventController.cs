@@ -36,7 +36,7 @@ namespace SharEventTest.Controllers
         [HttpPost]
         public async Task AddEvent(Event<GeoPoint> _event)
         {
-            await eventRepository.AddEvent(_event);
+           // await eventRepository.AddEvent(_event);
         }
 
 

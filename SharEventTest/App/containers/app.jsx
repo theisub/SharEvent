@@ -5,7 +5,7 @@ import Header from './header/header.jsx';
 import Routing from '../routes/route.jsx'
 
 export default class App extends React.Component {
-    render() {
+    render() {     
         return (
             <Router>
                 <div>
