@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DBRepository.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -30,6 +31,13 @@ namespace SharEventTest.Controllers
 
         }
 
+        [Authorize]
+        [Route("event")]
+        [HttpPost]
+        public async Task AddEvent(Event<GeoPoint> _event)
+        {
+            await eventRepository.AddEvent(_event);
+        }
 
 
 

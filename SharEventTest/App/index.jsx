@@ -4,14 +4,11 @@ import { createStore, applyMiddleware } from 'redux'
 import {Provider} from 'react-redux'
 import thunk from 'redux-thunk'
 import App from './containers/app.jsx' //3
-import eventReducer from './containers/event/eventReducer.jsx'
+import configureStore from './store/configureStore.jsx'
 
 
-function configureStore(initialState) {
-    return createStore(eventReducer, initialState, applyMiddleware(thunk))
-}
+const store = configureStore();
 
-const store = configureStore()
 render(
      <Provider store={store}>
         <App />

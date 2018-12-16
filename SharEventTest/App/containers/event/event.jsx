@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import ReactDOM from 'react-dom';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getEvents } from './eventActions.jsx';
 
@@ -10,10 +11,10 @@ class Event extends React.Component {
     }
 
     render() {
-        let events = this.props.events.points.map(item => {
+        let events = this.props.event.data.points.map(item => {
             return (
                 
-                <div key={item.eventId} className="event">
+                <div key={item.pointId} className="event">
                     <div value="point"> PointId: {item.pointId} Широта: {item.pointLatitiude} Долгота: {item.pointLongitude} </div>
                     <hr />
                 </div>
@@ -30,8 +31,7 @@ class Event extends React.Component {
 
 let mapProps = (state) => {
     return {
-        events: state.data,
-        error: state.error
+        event: state.event
     }
 }
 
