@@ -35,8 +35,8 @@ export function login(userName, password) {
     return (dispatch) => {
         if (userName && password) {
             var data = {
-                username: userName,
-                password: password
+                Login: userName,
+                Password: password
             };
 
             fetch(constants.token, {
