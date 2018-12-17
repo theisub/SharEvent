@@ -4,7 +4,10 @@
     <meta name="viewport" content="width=device-width" />
     <script type="text/javascript">
         constants = {
-            getPage: '@Url.RouteUrl("DefaultApi", new {controller = "event", action = "page" })'
+            getPage: '@Url.RouteUrl("DefaultApi", new {controller = "event", action = "page" })',
+            token: '@Url.RouteUrl("DefaultApi", new {controller = "identity", action = "token" })',
+            newevent: '@Url.RouteUrl("DefaultApi", new { controller = "event", action = "new" })',
+            tokenKey: 'tokenKey'
 
         }
     </script>

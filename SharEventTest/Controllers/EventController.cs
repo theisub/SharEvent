@@ -31,12 +31,12 @@ namespace SharEventTest.Controllers
 
         }
 
-        [Authorize]
-        [Route("event")]
+        //[Authorize]
+        [Route("new")]
         [HttpPost]
-        public async Task AddEvent(Event<GeoPoint> _event)
+        public async Task AddEvent([FromBody]Event<GeoPoint> _event)
         {
-           // await eventRepository.AddEvent(_event);
+           await eventRepository.AddEvent(_event);
         }
 
 

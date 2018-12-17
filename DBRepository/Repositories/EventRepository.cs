@@ -69,5 +69,15 @@ namespace DBRepository.Repositories
             }
         }
 
+        public async Task AddEvent(Event<GeoPoint> _event)
+        {
+            using (var context = ContextFactory.CreateDbContext(ConnectionString))
+            {
+                context.Events.Add(_event);
+                await context.SaveChangesAsync();
+
+            }
+        }
+
     }
 }
