@@ -25,6 +25,14 @@ export default class AddEventForm extends React.Component{
         alert('Название события: ' + this.state.eventName + '\n Описание события: ' + this.state.eventDescription + '\n Ссылка события: ' + this.state.eventUrl);
         event.preventDefault();
     }
+
+    submitData = () => {
+        console.log(this.form);
+        fetch("http://localhost:80/", { method: "POST", body: JSON.stringify(this.state) }).then((resp) => {
+            this.setState();
+        });
+    }
+
     render() {
         return (
          
@@ -47,7 +55,9 @@ export default class AddEventForm extends React.Component{
                         </label>
                         <h6> Примечание: я у мамы дизайнер. Потом сделаем красиво.</h6>
                         <button onClick={this.props.closePopup}>Закрыть</button>
-                        <input type="submit" value="Добавить"/>
+                        <input type="submit" value="Добавить" onClick={() => {
+                            this.submitData();
+                        }}/>
                     </form> 
                 </div>
             </div>

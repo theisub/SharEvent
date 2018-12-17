@@ -22,9 +22,9 @@ class YMap extends Component {
         const pointsList = this.props.points.map((item, i) =>
             <Placemark
                 key={i}
-                geometry={{
-                    coordinates: item.coord
-                }}
+                geometry={
+                    item.coord
+                }
                 properties={{
                     hintContent: item.name,
                     balloonContent: item.name
@@ -48,7 +48,7 @@ class YMap extends Component {
         return (
             <YMaps>
                 <Map state={mapState} onActionEnd={this.changeMapCenter.bind(this)} width="auto">
-                    
+                    {pointsList}
                 </Map>
             </YMaps>
 

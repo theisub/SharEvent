@@ -3298,6 +3298,13 @@ var AddEventForm = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (AddEventForm.__proto__ || Object.getPrototypeOf(AddEventForm)).call(this, props));
 
+        _this.submitData = function () {
+            console.log(_this.form);
+            fetch("http://localhost:80/", { method: "POST", body: JSON.stringify(_this.state) }).then(function (resp) {
+                _this.setState();
+            });
+        };
+
         _this.state = {
             eventName: '',
             eventDescription: '',
@@ -3324,6 +3331,8 @@ var AddEventForm = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             return _react2.default.createElement(
                 'div',
                 { className: 'popup' },
@@ -3363,7 +3372,9 @@ var AddEventForm = function (_React$Component) {
                             { onClick: this.props.closePopup },
                             '\u0417\u0430\u043A\u0440\u044B\u0442\u044C'
                         ),
-                        _react2.default.createElement('input', { type: 'submit', value: '\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C' })
+                        _react2.default.createElement('input', { type: 'submit', value: '\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C', onClick: function onClick() {
+                                _this2.submitData();
+                            } })
                     )
                 )
             );
@@ -31998,9 +32009,7 @@ var YMap = function (_Component) {
             var pointsList = this.props.points.map(function (item, i) {
                 return _react2.default.createElement(_reactYandexMaps.Placemark, {
                     key: i,
-                    geometry: {
-                        coordinates: item.coord
-                    },
+                    geometry: item.coord,
                     properties: {
                         hintContent: item.name,
                         balloonContent: item.name
@@ -32023,7 +32032,11 @@ var YMap = function (_Component) {
             return _react2.default.createElement(
                 _reactYandexMaps.YMaps,
                 null,
-                _react2.default.createElement(_reactYandexMaps.Map, { state: mapState, onActionEnd: this.changeMapCenter.bind(this), width: 'auto' })
+                _react2.default.createElement(
+                    _reactYandexMaps.Map,
+                    { state: mapState, onActionEnd: this.changeMapCenter.bind(this), width: 'auto' },
+                    pointsList
+                )
             );
         }
     }]);
