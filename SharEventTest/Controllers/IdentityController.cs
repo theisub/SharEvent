@@ -25,6 +25,17 @@ namespace SharEventTest.Controllers
             _service = service;
         }
 
+        [Route("register")]
+        [HttpPost]
+        public async Task AddUser([FromBody]User user)
+        {
+            var sha256 = new SHA256Managed();
+            var passwordHash = Convert.ToBase64String(sha256.ComputeHash(Encoding.UTF8.GetBytes(user.Password)));
+            user.SetPasswordHash(passwordHash);
+
+            await _service.AddUser(user);
+        }
+
         [Route("token")]
         [HttpPost]
         public async Task<IActionResult> Token([FromBody]User model)

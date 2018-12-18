@@ -19,5 +19,14 @@ namespace DBRepository.Repositories
                 return await context.Users.FirstOrDefaultAsync(u => u.Login == userName);
             }
         }
+
+        public async Task AddUser(User user)
+        {
+            using (var context = ContextFactory.CreateDbContext(ConnectionString))
+            {
+                context.Users.Add(user);
+                await context.SaveChangesAsync();
+            }
+        }
     }
 }

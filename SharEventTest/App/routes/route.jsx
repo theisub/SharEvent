@@ -6,6 +6,7 @@ import About from '../containers/about/about.jsx';
 import Event from '../containers/event/event.jsx';
 import AddEventForm from '../containers/event/AddEventForm.jsx';
 import YandexApiMap from '../containers/map/ymap.jsx';
+import RegisterForm from '../containers/header/register.jsx';
 
 export default class Routing extends React.Component {
     render() {
@@ -13,10 +14,10 @@ export default class Routing extends React.Component {
             <main>
                 <Switch>
                     <Route path="/about" component={About} />
-
+                    <Route path="/newuser" component={RegisterForm}/>
                     <Route path="/map" component={YandexApiMap} />
                     <Route path="/" component={Event} />
-                    <Route path="/add_event" component={AddEventForm} />
+                    <Route path="/newevent" component={AddEventForm} />
 
                 </Switch>
             </main>
