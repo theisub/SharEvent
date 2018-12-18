@@ -4,21 +4,31 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import LoginForm from '../../components/loginForm.jsx';
 import { login, logout, showLoginForm, inputLogin, inputPassword } from './headerActions.jsx';
-import AddEventForm from '../../containers/event/AddEventForm.jsx'
+import AddEventForm from '../../containers/event/AddEventForm.jsx';
+import RegisterForm from './register.jsx';
 
 class Header extends React.Component {
 
     constructor() {
         super();
         this.state = {
-            showAddEvent: false
+            showAddEvent: false,
+            showRegisterForm: false
         };
     }
 
 
     togglePopup() {
+        console.log(this.state.showAddEvent)
         this.setState({
             showAddEvent: !this.state.showAddEvent
+        });
+    }
+
+    toggleRegisterPopup() {
+        console.log(this.state.showRegisterForm)
+        this.setState({
+            showRegisterForm: !this.state.showRegisterForm
         });
     }
 
@@ -29,9 +39,6 @@ class Header extends React.Component {
         let newEventButton = this.props.header.isLogged ?
             <div className="menu">
                 <ul>
-                    <li>
-                        <Link className="link" to="/event/new">Новое событие</Link>
-                    </li>
                     <li>
                         <a className="link" onClick={() => { if (confirm('Вы уверены что хотите выйти?')) this.props.logout() }}>Выход</a>
                     </li>
@@ -65,15 +72,26 @@ class Header extends React.Component {
                             <Link to="/map">Покажи карту</Link>
                         </li>
                         <li>
-                            <Link to="/add_event" onClick={this.togglePopup.bind(this)}> Добавить событие </Link>
-                                {
-                                    this.state.showAddEvent ?
-                                        <AddEventForm
-                                            text='Добавить событие'
-                                            closePopup={this.togglePopup.bind(this)}
-                                        />
-                                        : null
-                                }
+                            <Link to="/newevent" onClick={this.togglePopup.bind(this)}> Добавить событие </Link>
+                            {
+                                this.state.showAddEvent ?
+                                    <AddEventForm
+                                        text='Добавить событие'
+                                        closePopup={this.togglePopup.bind(this)}
+                                    />
+                                    : null
+                            }
+                        </li>
+                        <li>
+                            <Link to="/newuser" onClick={this.toggleRegisterPopup.bind(this)}> Регистрация (cant close form -_-) </Link>
+                            {
+                                this.state.showRegisterForm ?
+                                    <RegisterForm
+                                        text='Добавить событие'
+                                        closePopup={this.toggleRegisterPopup.bind(this)}
+                                    />
+                                    : null
+                            }
                         </li>
                         
                     </ul>
