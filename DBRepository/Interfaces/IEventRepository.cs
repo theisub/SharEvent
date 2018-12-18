@@ -13,7 +13,7 @@ namespace DBRepository.Interfaces
         Task<List<int>> GetAllPoints(int eventId);
         //Task<Event<GeoPoint>> GetEvent(int eventId);
         Task AddPoint(GeoPoint _point);
-        //Task AddEvent (Event _event);
+        Task AddEvent (Event<GeoPoint> _event);
         //Task DeleteEvent(int eventId);
         Task DeletePoint(int pointId);
     }

@@ -27,10 +27,15 @@ export default class AddEventForm extends React.Component{
     }
 
     submitData = () => {
-        console.log(this.form);
-        fetch("http://localhost:80/", { method: "POST", body: JSON.stringify(this.state) }).then((resp) => {
-            this.setState();
-        });
+        //console.log(this.form);
+        fetch(constants.newevent,
+            {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                },
+                body: JSON.stringify(this.state)
+            }).then((response) => {this.setState()});
     }
 
     render() {

@@ -3299,8 +3299,14 @@ var AddEventForm = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (AddEventForm.__proto__ || Object.getPrototypeOf(AddEventForm)).call(this, props));
 
         _this.submitData = function () {
-            console.log(_this.form);
-            fetch("http://localhost:80/", { method: "POST", body: JSON.stringify(_this.state) }).then(function (resp) {
+            //console.log(this.form);
+            fetch(constants.newevent, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                },
+                body: JSON.stringify(_this.state)
+            }).then(function (response) {
                 _this.setState();
             });
         };
@@ -30845,11 +30851,11 @@ function logout() {
 }
 
 function login(userName, password) {
-    return function (dispath) {
+    return function (dispatch) {
         if (userName && password) {
             var data = {
-                username: userName,
-                password: password
+                Login: userName,
+                Password: password
             };
 
             fetch(constants.token, {
