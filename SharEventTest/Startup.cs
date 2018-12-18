@@ -30,6 +30,8 @@ namespace SharEventTest
             services.AddMvc();
             services.AddScoped<IEventContextFactory, EventContextFactory>();
             services.AddScoped<IEventRepository>(provider => new EventRepository(Configuration.GetConnectionString("DefaultConnection"), provider.GetService<IEventContextFactory>()));
+            services.AddScoped<IIdentityRepository>(provider => new IdentityRepository(Configuration.GetConnectionString("DefaultConnection"), provider.GetService<IEventContextFactory>()));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

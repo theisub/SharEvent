@@ -4,80 +4,79 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import LoginForm from '../../components/loginForm.jsx';
 import { login, logout, showLoginForm, inputLogin, inputPassword } from './headerActions.jsx';
-import AddEventForm from '../../containers/event/AddEventForm.jsx'
+import AddEventForm from '../../containers/event/AddEventForm.jsx';
+import RegisterForm from './register.jsx';
 
 class Header extends React.Component {
 
     constructor() {
         super();
         this.state = {
-            showAddEvent: false
+            showAddEvent: false,
+            showRegisterForm: false
         };
     }
-
-
+    
     togglePopup() {
+        console.log(this.state.showAddEvent)
         this.setState({
             showAddEvent: !this.state.showAddEvent
         });
     }
 
-
-
-
+    toggleRegisterPopup() {
+        console.log(this.state.showRegisterForm)
+        this.setState({
+            showRegisterForm: !this.state.showRegisterForm
+        });
+    }
+    
     render() {
-        let newEventButton = this.props.header.isLogged ?
-            <div className="menu">
-                <ul>
-                    <li>
-                        <Link className="link" to="/event/new">Новое событие</Link>
-                    </li>
-                    <li>
-                        <a className="link" onClick={() => { if (confirm('Вы уверены что хотите выйти?')) this.props.logout() }}>Выход</a>
-                    </li>
-                </ul>
-            </div> :
-            '';
-        let loginButton = this.props.header.isLogged ?
-            <span className="nameLabel">Привет, {this.props.header.name}</span> :
-            <a className="link" onClick={() => { this.props.showLoginForm(!this.props.header.isLoginFormShowed); }}>Тык сюда для авторизации</a>
-        let loginForm = this.props.header.isLoginFormShowed ?
-            <LoginForm onLogin={this.props.login} login={this.props.header.name} password={this.props.header.password} onChangeLogin={this.props.inputLogin} onChangePassword={this.props.inputPassword} /> :
-            '';
+        let logoutButton = this.props.header.isLogged ?
+            <a className="link" onClick={() => { if (confirm('Вы уверены что хотите выйти?')) this.props.logout() }}>Выход</a>
+            : '';
 
+        let loginButton = this.props.header.isLogged ?
+            <span className="nameLabel">Привет, {this.props.header.name}</span>
+            : <a className="link" onClick={() => { this.props.showLoginForm(!this.props.header.isLoginFormShowed); }}>Авторизация</a>
+
+        let loginForm = this.props.header.isLoginFormShowed ?
+            <LoginForm onLogin={this.props.login} login={this.props.header.name} password={this.props.header.password} onChangeLogin={this.props.inputLogin} onChangePassword={this.props.inputPassword} />
+            : '';
+
+        let registerButton = !this.props.header.isLogged ?
+            <Link to="/newuser" onClick={this.toggleRegisterPopup.bind(this)}> Регистрация </Link>
+            : null;
+
+        let addEventButton = this.props.header.isLogged ?
+            < Link to="/newevent" onClick={this.togglePopup.bind(this)} > Добавить событие </Link>
+            : null;
         
         return (
             <header>
-                <div className="mainMenu">
-                    {loginButton}
-                    {loginForm}
-                    {newEventButton}
-                </div>
-                <menu>
+                <div className="main-header">
+                    <h1>SharEvent</h1>
+                    <nav>
+                        <Link to="/">Событие</Link>
+                        <Link to="/about">Обо мне</Link>
+                        <Link to="/map">Покажи карту</Link>
+                        {addEventButton}
+                        {
+                            this.state.showAddEvent ?
+                                <AddEventForm closePopup={this.togglePopup.bind(this)} /> : null
+                        }
+                    </nav>
                     <ul>
-                        <li>
-                            <Link to="/">Событие</Link>
-                        </li>
-                        <li>
-                            <Link to="/about">Обо мне</Link>
-                        </li>
-                        <li>
-                            <Link to="/map">Покажи карту</Link>
-                        </li>
-                        <li>
-                            <Link to="/add_event" onClick={this.togglePopup.bind(this)}> Добавить событие </Link>
-                                {
-                                    this.state.showAddEvent ?
-                                        <AddEventForm
-                                            text='Добавить событие'
-                                            closePopup={this.togglePopup.bind(this)}
-                                        />
-                                        : null
-                                }
-                        </li>
-                        
+                        <li>{loginButton}</li>
+                        <li>{loginForm}</li>
+                        <li>{logoutButton}</li>
+                        <li>{registerButton}</li>
+                        {
+                            this.state.showRegisterForm ?
+                                <RegisterForm closePopup={this.toggleRegisterPopup.bind(this)} /> : null
+                        } 
                     </ul>
-                </menu>
+                </div>
             </header>
 
             
