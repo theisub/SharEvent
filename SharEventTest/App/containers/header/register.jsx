@@ -23,6 +23,7 @@ export default class RegisterForm extends React.Component {
 
     handleSubmitForm(event) {
         alert('Учетная запись создана');
+        console.log(this.props.closePopup);
         event.preventDefault();
     }
 
@@ -59,11 +60,12 @@ export default class RegisterForm extends React.Component {
                         </label>
                         <br />
                         <h6> Примечание: я у мамы дизайнер. Потом сделаем красиво.</h6>
+                        <button onClick={this.props.closePopup}>Отмена</button>
                         <input type="submit" value="Зарегистрироваться" onClick={() => {
                             this.submitData();
                         }} />
-                        <button onClick={this.props.closePopup}>Отмена</button>
-                </form>
+                        
+                    </form>
                 </div>
             </div>
 
