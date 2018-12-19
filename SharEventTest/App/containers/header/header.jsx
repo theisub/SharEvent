@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import LoginForm from '../../components/loginForm.jsx';
 import { login, logout, showLoginForm, inputLogin, inputPassword } from './headerActions.jsx';
 import AddEventForm from '../../containers/event/AddEventForm.jsx';
-import RegisterForm from './register.jsx';
+import RegisterForm from '../../components/registerForm.jsx';
+import {register, showRegisterForm, inputRegLogin, inputRegPassword, inputRegRepeatPassword } from './registerActions.jsx';
 
 class Header extends React.Component {
 
@@ -13,7 +14,6 @@ class Header extends React.Component {
         super();
         this.state = {
             showAddEvent: false,
-            showRegisterForm: false
         };
     }
     
@@ -24,17 +24,16 @@ class Header extends React.Component {
         });
     }
 
-    toggleRegisterPopup() {
-        console.log(this.state.showRegisterForm)
-        this.setState({
-            showRegisterForm: !this.state.showRegisterForm
-        });
-    }
     
     render() {
+
+
         let logoutButton = this.props.header.isLogged ?
             <a className="link" onClick={() => { if (confirm('Вы уверены что хотите выйти?')) this.props.logout() }}>Выход</a>
             : '';
+
+        // LOGIN BUTTON //
+        //  LOGIN FORM  //
 
         let loginButton = this.props.header.isLogged ?
             <span className="nameLabel">Привет, {this.props.header.name}</span>
@@ -44,9 +43,18 @@ class Header extends React.Component {
             <LoginForm onLogin={this.props.login} login={this.props.header.name} password={this.props.header.password} onChangeLogin={this.props.inputLogin} onChangePassword={this.props.inputPassword} />
             : '';
 
+        // REGISTER BUTTON //
+        //  REGISTER FORM  //
+
         let registerButton = !this.props.header.isLogged ?
-            <Link to="/newuser" onClick={this.toggleRegisterPopup.bind(this)}> Регистрация </Link>
+            <a className="link" onClick={() => { this.props.showRegisterForm(!this.props.header.isRegisterFormShowed); }}>Регистрация</a>
             : null;
+
+        let registerForm = this.props.header.isRegisterFormShowed ?
+            <RegisterForm onRegister={this.props.register} login={this.props.header.regName} password={this.props.header.regPass} repeatPassword={this.props.header.regRepeatPass}
+                onChangeLogin={this.props.inputRegLogin} onChangePassword={this.props.inputRegPassword} onChangeRepeatPassword={this.props.inputRegRepeatPassword} />
+            : '';
+
 
         let addEventButton = this.props.header.isLogged ?
             < Link to="/newevent" onClick={this.togglePopup.bind(this)} > Добавить событие </Link>
@@ -72,13 +80,10 @@ class Header extends React.Component {
                         <li>{loginButton}</li>
                         <li>{logoutButton}</li>
                         <li>{registerButton}</li>
-                        {
-                            this.state.showRegisterForm ?
-                                <RegisterForm closePopup={this.toggleRegisterPopup.bind(this)} /> : null
-                        } 
                     </ul>
 
                     {loginForm}
+                    {registerForm}
                 </div>
             </header>
 
@@ -101,7 +106,13 @@ let mapDispatch = (dispatch) => {
         logout: bindActionCreators(logout, dispatch),
         showLoginForm: bindActionCreators(showLoginForm, dispatch),
         inputLogin: bindActionCreators(inputLogin, dispatch),
-        inputPassword: bindActionCreators(inputPassword, dispatch)
+        inputPassword: bindActionCreators(inputPassword, dispatch),
+
+        showRegisterForm: bindActionCreators(showRegisterForm, dispatch),
+        register: bindActionCreators(register, dispatch),
+        inputRegLogin: bindActionCreators(inputRegLogin, dispatch),
+        inputRegPassword: bindActionCreators(inputRegPassword, dispatch),
+        inputRegRepeatPassword: bindActionCreators(inputRegRepeatPassword, dispatch)
     }
 }
 
