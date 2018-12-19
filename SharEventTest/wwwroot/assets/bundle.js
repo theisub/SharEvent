@@ -30814,11 +30814,6 @@ var Header = function (_React$Component) {
                         _react2.default.createElement(
                             'li',
                             null,
-                            loginForm
-                        ),
-                        _react2.default.createElement(
-                            'li',
-                            null,
                             logoutButton
                         ),
                         _react2.default.createElement(
@@ -30827,7 +30822,8 @@ var Header = function (_React$Component) {
                             registerButton
                         ),
                         this.state.showRegisterForm ? _react2.default.createElement(_register2.default, { closePopup: this.toggleRegisterPopup.bind(this) }) : null
-                    )
+                    ),
+                    loginForm
                 )
             );
         }
@@ -30903,28 +30899,19 @@ var LoginForm = function (_React$Component) {
                 'div',
                 { className: 'loginForm' },
                 _react2.default.createElement(
-                    'div',
-                    { className: 'row' },
-                    '\u041B\u043E\u0433\u0438\u043D: ',
-                    _react2.default.createElement('input', { type: 'input', value: this.props.login, onChange: function onChange(e) {
-                            return _this2.props.onChangeLogin(e.target.value);
-                        }, className: 'input' })
+                    'h2',
+                    null,
+                    ' \u041F\u0440\u0438\u0432\u0435\u0442\u0438\u043A! '
                 ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'row' },
-                    '\u041F\u0430\u0440\u043E\u043B\u044C: ',
-                    _react2.default.createElement('input', { type: 'password', value: this.props.password, onChange: function onChange(e) {
-                            return _this2.props.onChangePassword(e.target.value);
-                        }, className: 'input' })
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'row' },
-                    _react2.default.createElement('input', { type: 'button', value: '\u0412\u043E\u0439\u0442\u0438', className: 'input', onClick: function onClick() {
-                            return _this2.props.onLogin(_this2.props.login, _this2.props.password);
-                        } })
-                )
+                _react2.default.createElement('input', { type: 'input', placeholder: 'username', value: this.props.login, onChange: function onChange(e) {
+                        return _this2.props.onChangeLogin(e.target.value);
+                    }, className: 'input' }),
+                _react2.default.createElement('input', { type: 'password', placeholder: 'password', value: this.props.password, onChange: function onChange(e) {
+                        return _this2.props.onChangePassword(e.target.value);
+                    }, className: 'input' }),
+                _react2.default.createElement('input', { type: 'button', value: '\u0412\u043E\u0439\u0442\u0438', className: 'input', onClick: function onClick() {
+                        return _this2.props.onLogin(_this2.props.login, _this2.props.password);
+                    } })
             );
         }
     }]);

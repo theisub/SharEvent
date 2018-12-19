@@ -51,6 +51,8 @@ class Header extends React.Component {
         let addEventButton = this.props.header.isLogged ?
             < Link to="/newevent" onClick={this.togglePopup.bind(this)} > Добавить событие </Link>
             : null;
+
+        
         
         return (
             <header>
@@ -68,7 +70,6 @@ class Header extends React.Component {
                     </nav>
                     <ul>
                         <li>{loginButton}</li>
-                        <li>{loginForm}</li>
                         <li>{logoutButton}</li>
                         <li>{registerButton}</li>
                         {
@@ -76,6 +77,8 @@ class Header extends React.Component {
                                 <RegisterForm closePopup={this.toggleRegisterPopup.bind(this)} /> : null
                         } 
                     </ul>
+
+                    {loginForm}
                 </div>
             </header>
 
