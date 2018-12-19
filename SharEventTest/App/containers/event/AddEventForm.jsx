@@ -42,27 +42,24 @@ export default class AddEventForm extends React.Component{
         return (
          
             <div className='popup'>
-                <div className='popup_inner'>
+                <div className='popup-inner'>
                     <form onSubmit={this.handleSubmit}>
-                        <label>
-                            EventName:
-                        <input type="text" name="eventName" value={this.state.eventName} onChange={this.handleChange} />
-                        </label>
-                        <br />
-                        <label>
-                            EventDescription:
-                        <textarea name="eventDescription" value={this.state.eventDescription} onChange={this.handleChange} />
-                        </label>
-                        <br />
-                        <label>
-                            EventUrl:
-                        <input type="url" name="eventUrl" value={this.state.eventUrl} onChange={this.handleChange} />
-                        </label>
-                        <h6> Примечание: я у мамы дизайнер. Потом сделаем красиво.</h6>
+                        
+                        <h3>Название события </h3>
+                        <input type="text" placeholder='Event name' name="eventName" value={this.state.eventName} onChange={this.handleChange} />
+
+                        <h3>Описание </h3>
+                        <textarea name="eventDescription" placeholder="Description" value={this.state.eventDescription} onChange={this.handleChange} />
+
+                        <h3>Url</h3>
+                        <input type="url" name="eventUrl" placeholder="Url" value={this.state.eventUrl} onChange={this.handleChange} />
+
+                        <div className='submitForm'>
+                            <input type="submit" value="Добавить" onClick={() => {
+                                this.submitData();
+                                }} />
+                        </div>
                         <button onClick={this.props.closePopup}>Закрыть</button>
-                        <input type="submit" value="Добавить" onClick={() => {
-                            this.submitData();
-                        }}/>
                     </form> 
                 </div>
             </div>

@@ -3344,43 +3344,40 @@ var AddEventForm = function (_React$Component) {
                 { className: 'popup' },
                 _react2.default.createElement(
                     'div',
-                    { className: 'popup_inner' },
+                    { className: 'popup-inner' },
                     _react2.default.createElement(
                         'form',
                         { onSubmit: this.handleSubmit },
                         _react2.default.createElement(
-                            'label',
+                            'h3',
                             null,
-                            'EventName:',
-                            _react2.default.createElement('input', { type: 'text', name: 'eventName', value: this.state.eventName, onChange: this.handleChange })
+                            '\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0441\u043E\u0431\u044B\u0442\u0438\u044F '
                         ),
-                        _react2.default.createElement('br', null),
+                        _react2.default.createElement('input', { type: 'text', placeholder: 'Event name', name: 'eventName', value: this.state.eventName, onChange: this.handleChange }),
                         _react2.default.createElement(
-                            'label',
+                            'h3',
                             null,
-                            'EventDescription:',
-                            _react2.default.createElement('textarea', { name: 'eventDescription', value: this.state.eventDescription, onChange: this.handleChange })
+                            '\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 '
                         ),
-                        _react2.default.createElement('br', null),
+                        _react2.default.createElement('textarea', { name: 'eventDescription', placeholder: 'Description', value: this.state.eventDescription, onChange: this.handleChange }),
                         _react2.default.createElement(
-                            'label',
+                            'h3',
                             null,
-                            'EventUrl:',
-                            _react2.default.createElement('input', { type: 'url', name: 'eventUrl', value: this.state.eventUrl, onChange: this.handleChange })
+                            'Url'
                         ),
+                        _react2.default.createElement('input', { type: 'url', name: 'eventUrl', placeholder: 'Url', value: this.state.eventUrl, onChange: this.handleChange }),
                         _react2.default.createElement(
-                            'h6',
-                            null,
-                            ' \u041F\u0440\u0438\u043C\u0435\u0447\u0430\u043D\u0438\u0435: \u044F \u0443 \u043C\u0430\u043C\u044B \u0434\u0438\u0437\u0430\u0439\u043D\u0435\u0440. \u041F\u043E\u0442\u043E\u043C \u0441\u0434\u0435\u043B\u0430\u0435\u043C \u043A\u0440\u0430\u0441\u0438\u0432\u043E.'
+                            'div',
+                            { className: 'submitForm' },
+                            _react2.default.createElement('input', { type: 'submit', value: '\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C', onClick: function onClick() {
+                                    _this2.submitData();
+                                } })
                         ),
                         _react2.default.createElement(
                             'button',
                             { onClick: this.props.closePopup },
                             '\u0417\u0430\u043A\u0440\u044B\u0442\u044C'
-                        ),
-                        _react2.default.createElement('input', { type: 'submit', value: '\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C', onClick: function onClick() {
-                                _this2.submitData();
-                            } })
+                        )
                     )
                 )
             );
@@ -30804,9 +30801,13 @@ var LoginForm = function (_React$Component) {
                 _react2.default.createElement('input', { type: 'password', placeholder: 'password', value: this.props.password, onChange: function onChange(e) {
                         return _this2.props.onChangePassword(e.target.value);
                     }, className: 'input' }),
-                _react2.default.createElement('input', { type: 'button', value: '\u0412\u043E\u0439\u0442\u0438', className: 'input', onClick: function onClick() {
-                        return _this2.props.onLogin(_this2.props.login, _this2.props.password);
-                    } })
+                _react2.default.createElement(
+                    'div',
+                    { className: 'submitForm' },
+                    _react2.default.createElement('input', { type: 'button', value: '\u0412\u043E\u0439\u0442\u0438', className: 'input', onClick: function onClick() {
+                            return _this2.props.onLogin(_this2.props.login, _this2.props.password);
+                        } })
+                )
             );
         }
     }]);
@@ -31491,9 +31492,13 @@ var RegisterForm = function (_React$Component) {
                 _react2.default.createElement("input", { type: "password", placeholder: "repeat password", value: this.props.repeatPassword, onChange: function onChange(e) {
                         return _this2.props.onChangeRepeatPassword(e.target.value);
                     }, className: "input" }),
-                _react2.default.createElement("input", { type: "button", value: "\u0412\u043E\u0439\u0442\u0438", className: "input", onClick: function onClick() {
-                        return _this2.props.onRegister(_this2.props.login, _this2.props.repeatPassword, _this2.props.password);
-                    } })
+                _react2.default.createElement(
+                    "div",
+                    { className: "submitForm" },
+                    _react2.default.createElement("input", { type: "button", value: "\u0417\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C\u0441\u044F", className: "input", onClick: function onClick() {
+                            return _this2.props.onRegister(_this2.props.login, _this2.props.repeatPassword, _this2.props.password);
+                        } })
+                )
             );
         }
     }]);
