@@ -1,5 +1,5 @@
 ﻿
-import { LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT, SHOW_LOGIN_FORM, INPUT_LOGIN, INPUT_PASSWORD } from './headerConstants.jsx'
+import { LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT, SHOW_LOGIN_FORM, INPUT_LOGIN, INPUT_PASSWORD} from './headerConstants.jsx'
 import Auth from '../../utilities/auth.js'
 import "isomorphic-fetch"
 
