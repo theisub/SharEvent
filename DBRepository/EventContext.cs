@@ -14,8 +14,8 @@ namespace DBRepository
 
 
         }
-        public DbSet<User> Users { get; set; } //Это надо?
-        public DbSet<GeoPoint> GeoPoints { get; set; } //И это тоже
+        public DbSet<User> Users { get; set; } 
+        public DbSet<GeoPoint> GeoPoints { get; set; }
         public DbSet<Event<GeoPoint>> Events { get; set; }
 
 

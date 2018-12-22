@@ -16,9 +16,30 @@ export default class YandexApiMap extends React.Component {
             points: []
         };
 
-        this.priv = this.priv.bind(this);
+
+        /*Я дико извиняюсь, но это сделано, чтобы можно было нормально разбить массив с координатами на 2 отдельных поля. 
+         Можно конечно постараться и обойтись без него, но придется переписывать половину функций*/
+        this.pointsToSend = {
+            lats: [],
+            longs: []    
+        }
     }
 
+
+    //Тут костыль с EventId. Подробнее в EventController.cs - 50 строка
+    componentDidMount() {
+        fetch("https://localhost:44309/api/event/page?eventId=3")
+            .then(response => response.json())
+            .then(data => {
+                const results = data.points.map(x => {
+                    
+                    return {
+                        coord: new Array(x.pointLatitiude, x.pointLongitude)
+                    }
+                })
+                this.setState({ points: results });
+            });
+    }
 
     changeMapCenter(coord) {
         this.setState({
@@ -34,7 +55,6 @@ export default class YandexApiMap extends React.Component {
             points: points
         })
     }
-
 
     addPoint(name, coord) {
         this.setState({
@@ -53,23 +73,39 @@ export default class YandexApiMap extends React.Component {
         })
     }
 
-    priv(e) {
-        this.setState(prev =>
-            (
-                {
-                    num: prev.num + 1
+    parseIntoFormat()
+    {
 
-                }
-            ));
+        this.pointsToSend.lats = []
+        this.pointsToSend.longs = []
 
+        for (var i = 0,len = this.state.points.length; i < len; i++)
+        {
+            this.pointsToSend.lats[i]=this.state.points[i].coord[0];
+            this.pointsToSend.longs[i]=this.state.points[i].coord[1];
+
+        }
+        console.log(this.pointsToSend)
     }
 
+    submitData = () => {
+        fetch(constants.addPointsToEvent,
+            {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                },
+                //Пока не получаем EventId,временный костыль. Чуть подробнее на EventController.cs - 50 строка.
+                body: JSON.stringify({ EventId: 39, PointLatitiudeList: this.pointsToSend.lats, PointLongitudeList: this.pointsToSend.longs })
+            }).then((response) => { console.log(response.body); this.setState() });
+        
 
+    }
+   
     render() {
         const pointsList = this.state.points.map((item, i) =>
             <Point key={i} id={i} name={item.coord} removePoint={(i) => this.removePoint(i)} />
         );
-       
 
         return (
             <div className="map">
@@ -87,16 +123,13 @@ export default class YandexApiMap extends React.Component {
                         changePoint={this.changePoint.bind(this)}
                         changeMapCenter={this.changeMapCenter.bind(this)}
                     />
-
-                   
-
                     
                     <div>
                         Center:  {this.state.center}
                     </div>
 
+                <button onClick={() => { this.parseIntoFormat(), this.submitData(); }}> Обновить точки в базе</button>
 
-                    <button onClick={this.priv}>{this.state.num}</button>
             </div>
         );
     }

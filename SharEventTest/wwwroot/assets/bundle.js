@@ -3299,7 +3299,6 @@ var AddEventForm = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (AddEventForm.__proto__ || Object.getPrototypeOf(AddEventForm)).call(this, props));
 
         _this.submitData = function () {
-            //console.log(this.form);
             fetch(constants.newevent, {
                 method: "POST",
                 headers: {
@@ -3307,7 +3306,7 @@ var AddEventForm = function (_React$Component) {
                 },
                 body: JSON.stringify(_this.state)
             }).then(function (response) {
-                _this.setState();
+                console.log(response.body);_this.setState();
             });
         };
 
@@ -31917,6 +31916,18 @@ var YandexApiMap = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (YandexApiMap.__proto__ || Object.getPrototypeOf(YandexApiMap)).call(this, props));
 
+        _this.submitData = function () {
+            fetch(constants.addPointsToEvent, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                },
+                body: JSON.stringify({ EventId: 39, PointLatitiudeList: _this.pointsToSend.lats, PointLongitudeList: _this.pointsToSend.longs })
+            }).then(function (response) {
+                console.log(response.body);_this.setState();
+            });
+        };
+
         _this.state = {
             num: 0,
             center: [55.76, 37.64],
@@ -31924,10 +31935,35 @@ var YandexApiMap = function (_React$Component) {
         };
 
         _this.priv = _this.priv.bind(_this);
+        _this.pointsToSend = {
+            lats: [],
+            longs: []
+        };
         return _this;
     }
 
     _createClass(YandexApiMap, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            fetch("https://localhost:44309/api/event/page?eventId=3").then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                var results = data.points.map(function (x) {
+
+                    return {
+                        coord: new Array(x.pointLatitiude, x.pointLongitude)
+                    };
+                });
+                _this2.setState({ points: results });
+            });
+        }
+
+        //{ "pointId": 1, "eventId": 3, "pointLatitiude": 44.00, "pointLongitude": 55.00 }
+        //,Coords: x.points.pointLatitiude + ' ' + x.points.Longitude
+
+    }, {
         key: 'changeMapCenter',
         value: function changeMapCenter(coord) {
             this.setState({
@@ -31964,7 +32000,22 @@ var YandexApiMap = function (_React$Component) {
             });
         }
     }, {
+        key: 'parseIntoFormat',
+        value: function parseIntoFormat() {
+
+            this.pointsToSend.lats = [];
+            this.pointsToSend.longs = [];
+
+            for (var i = 0, len = this.state.points.length; i < len; i++) {
+                this.pointsToSend.lats[i] = this.state.points[i].coord[0];
+                this.pointsToSend.longs[i] = this.state.points[i].coord[1];
+            }
+            console.log(this.pointsToSend);
+        }
+    }, {
         key: 'priv',
+
+        //{ "eventName": "testingjson", "eventDescription": "jsonaa", "eventUrl": "" }
         value: function priv(e) {
             this.setState(function (prev) {
                 return {
@@ -31976,11 +32027,11 @@ var YandexApiMap = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _this2 = this;
+            var _this3 = this;
 
             var pointsList = this.state.points.map(function (item, i) {
                 return _react2.default.createElement(_Point2.default, { key: i, id: i, name: item.coord, removePoint: function removePoint(i) {
-                        return _this2.removePoint(i);
+                        return _this3.removePoint(i);
                     } });
             });
 
@@ -32007,8 +32058,10 @@ var YandexApiMap = function (_React$Component) {
                 ),
                 _react2.default.createElement(
                     'button',
-                    { onClick: this.priv },
-                    this.state.num
+                    { onClick: function onClick() {
+                            _this3.parseIntoFormat(), _this3.submitData();
+                        } },
+                    ' \u041E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u0442\u043E\u0447\u043A\u0438 \u0432 \u0431\u0430\u0437\u0435'
                 )
             );
         }

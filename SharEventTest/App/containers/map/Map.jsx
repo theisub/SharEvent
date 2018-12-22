@@ -51,12 +51,9 @@ class YMap extends Component {
                     {pointsList}
                 </Map>
             </YMaps>
-
+            
         )
     };
-
-
-
 
 }
 
