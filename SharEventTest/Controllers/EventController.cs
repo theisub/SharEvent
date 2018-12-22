@@ -34,12 +34,25 @@ namespace SharEventTest.Controllers
         //[Authorize]
         [Route("new")]
         [HttpPost]
-        public async Task AddEvent([FromBody]Event<GeoPoint> _event)
+        public Task<int> AddEvent([FromBody]Event<GeoPoint> _event)
         {
-           await eventRepository.AddEvent(_event);
+            return eventRepository.AddEvent(_event);
         }
 
+        [Route("addpoints")]
+        [HttpPost]
+        public async Task AddPoints([FromBody]GeoPoint _points)
+        {
+            /*Это пока временно, потом поменяем на _points.EventId, который мы получим сразу же после создания ивента. В дальнейшем мы получаем id при генерации ивента,
+            если сейчас попробовать создать ивент, то страница отдаст в хедере ответ с номером созданного ивента(он в виде простого числа, не json). 
+            Надо только подумать как лучше его держать (думаю в виде доп. стейта).*/
+            int eventId = 21;
 
+            await eventRepository.CleanEventFromGeoPoints(eventId);
+            for (int i = 0; i < _points.PointLatitiudeList.Count(); i++)
+               await eventRepository.AddPoint(new GeoPoint { EventId = eventId, PointLatitiude = _points.PointLatitiudeList[i], PointLongitude = _points.PointLongitudeList[i] });
 
+        }
+        
     }
 }

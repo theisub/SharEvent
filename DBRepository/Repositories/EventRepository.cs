@@ -69,15 +69,26 @@ namespace DBRepository.Repositories
             }
         }
 
-        public async Task AddEvent(Event<GeoPoint> _event)
+        public async Task<int> AddEvent(Event<GeoPoint> _event)
         {
             using (var context = ContextFactory.CreateDbContext(ConnectionString))
             {
                 context.Events.Add(_event);
                 await context.SaveChangesAsync();
-
+                return _event.EventId;
             }
         }
 
+        public async Task CleanEventFromGeoPoints(int eventId)
+        {
+            using (var context = ContextFactory.CreateDbContext(ConnectionString))
+            {
+                var result = context.GeoPoints.Where(b => b.EventId == eventId);
+                
+                context.GeoPoints.RemoveRange(result);
+                await context.SaveChangesAsync();
+            }
+
+        }
     }
 }

@@ -27,7 +27,6 @@ export default class AddEventForm extends React.Component{
     }
 
     submitData = () => {
-        //console.log(this.form);
         fetch(constants.newevent,
             {
                 method: "POST",
@@ -35,7 +34,9 @@ export default class AddEventForm extends React.Component{
                     'Content-Type': 'application/json; charset=utf-8'
                 },
                 body: JSON.stringify(this.state)
-            }).then((response) => {this.setState()});
+            }).then((response) => { console.log(response.body); this.setState() });
+       
+
     }
 
     render() {
