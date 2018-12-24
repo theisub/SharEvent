@@ -8,8 +8,10 @@
             newevent: '@Url.RouteUrl("DefaultApi", new { controller = "event", action = "new" })',
             token_acc: '@Url.RouteUrl("DefaultApi", new {controller = "identity", action = "token" })',
             register: '@Url.RouteUrl("DefaultApi", new { controller = "identity", action = "register"})',
-            addPointsToEvent:'@Url.RouteUrl("DefaultApi", new { controller = "event", action = "addpoints"})',
-            tokenKey: 'tokenKey'
+            addPointsToEvent: '@Url.RouteUrl("DefaultApi", new { controller = "event", action = "addpoints"})',
+            getEventsList: '@Url.RouteUrl("DefaultApi", new { controller = "event", action = "geteventslist" })',
+            tokenKey: 'tokenKey',
+            currentUserId: 'currentUserId'
 
         }
     </script>

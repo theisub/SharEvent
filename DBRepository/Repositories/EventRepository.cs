@@ -43,6 +43,19 @@ namespace DBRepository.Repositories
 
         }
 
+        public async Task<List<Event<GeoPoint>>> GetEventsWhereAdminHasId(int userId)
+        {
+            var result = new List<Event<GeoPoint>>();
+            using (var context = ContextFactory.CreateDbContext(ConnectionString))
+            {
+                var events = context.Events.AsQueryable();
+                events = events.Where(ev => ev.AdminId == userId);
+
+                result = await events.ToListAsync();
+            }
+            return result;
+        }
+
 
 
         public async Task AddPoint(GeoPoint _point)
