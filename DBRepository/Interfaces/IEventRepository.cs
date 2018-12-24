@@ -11,6 +11,7 @@ namespace DBRepository.Interfaces
         Task<Event<GeoPoint>> GetPoints(int eventId);
         //Task<GeoPoint> GetPoint(int pointId);
         Task<List<int>> GetAllPoints(int eventId);
+        Task<List<Event<GeoPoint>>> GetEventsWhereAdminHasId(int userId);
         //Task<Event<GeoPoint>> GetEvent(int eventId);
         Task AddPoint(GeoPoint _point);
 

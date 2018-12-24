@@ -55,6 +55,7 @@ export function login(userName, password) {
                 }
             }).then((data) => {
                 Auth.saveAuth(data.username, data.access_token);
+                Auth.saveUserId(data.userId);
                 dispatch({ type: LOGIN_SUCCESS, payload: data.username });
             }).catch((ex) => {
                 alert(ex);

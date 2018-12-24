@@ -15,7 +15,7 @@ export function errorReceive(err) {
     }
 }
 
-export function getEvents(eventId = 3) {
+export function getEvents(eventId = 21) {
     return (dispatch) => {
         let queryTrailer = '?eventId=' + eventId;    
         fetch(constants.getPage + queryTrailer)

@@ -11,6 +11,7 @@ class Event extends React.Component {
     }
 
     render() {
+        console.log(this.props.event.data);
         let events = this.props.event.data.points.map(item => {
             return (
                 

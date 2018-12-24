@@ -31,6 +31,13 @@ namespace SharEventTest.Controllers
 
         }
 
+        [Route("geteventslist")]
+        [HttpGet]
+        public async Task<List<Event<GeoPoint>>> GetEventsList(int userId)
+        {
+            return await eventRepository.GetEventsWhereAdminHasId(userId);
+        }
+
         //[Authorize]
         [Route("new")]
         [HttpPost]
