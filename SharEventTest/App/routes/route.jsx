@@ -16,9 +16,9 @@ export default class Routing extends React.Component {
                 <Switch>
                     <Route path="/about" component={About} />
                     <Route path="/map" component={YandexApiMap} />
-                    <Route path="/" component={Home} />
                     <Route path="/events" component={EventsList} />
                     <Route path="/newevent" component={AddEventForm} />
+                    <Route path="/" component={Home} />
 
                 </Switch>
             </main>

@@ -31701,9 +31701,9 @@ var Routing = function (_React$Component) {
                     null,
                     _react2.default.createElement(_reactRouterDom.Route, { path: '/about', component: _about2.default }),
                     _react2.default.createElement(_reactRouterDom.Route, { path: '/map', component: _ymap2.default }),
-                    _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _home2.default }),
                     _react2.default.createElement(_reactRouterDom.Route, { path: '/events', component: _EventsList2.default }),
-                    _react2.default.createElement(_reactRouterDom.Route, { path: '/newevent', component: _AddEventForm2.default })
+                    _react2.default.createElement(_reactRouterDom.Route, { path: '/newevent', component: _AddEventForm2.default }),
+                    _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _home2.default })
                 )
             );
         }
