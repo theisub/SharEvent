@@ -16,14 +16,12 @@ export default class YandexApiMap extends React.Component {
         super(props);
 
         this.state = {
-            eventId: 1, //это изменится при загрузке компонента
+            eventId: 1, 
             center: [55.76, 37.64],
             points: []
         };
 
 
-        /*Я дико извиняюсь, но это сделано, чтобы можно было нормально разбить массив с координатами на 2 отдельных поля. 
-         Можно конечно постараться и обойтись без него, но придется переписывать половину функций*/
         this.pointsToSend = {
             lats: [],
             longs: []
@@ -65,10 +63,10 @@ export default class YandexApiMap extends React.Component {
         })
     }
 
-    addPoint(name, coord) {
+    addPoint(coord) {
         this.setState({
             points: this.state.points.concat([{
-                coord: this.state.center
+                coord: coord //сорян за такое
             }])
         })
     }
@@ -123,7 +121,7 @@ export default class YandexApiMap extends React.Component {
         return (
             <div className="map">
 
-                    <Field addPoint={this.addPoint.bind(this)} />
+                    
 
                     <div className="app__points">
                         {pointsList}
@@ -135,6 +133,7 @@ export default class YandexApiMap extends React.Component {
                         center={this.state.center}
                         points={this.state.points}
                         changePoint={this.changePoint.bind(this)}
+                        addPoint={this.addPoint.bind(this)}
                         changeMapCenter={this.changeMapCenter.bind(this)}
                     />
                     

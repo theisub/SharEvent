@@ -32033,13 +32033,11 @@ var YandexApiMap = function (_React$Component) {
         };
 
         _this.state = {
-            eventId: 1, //это изменится при загрузке компонента
+            eventId: 1,
             center: [55.76, 37.64],
             points: []
         };
 
-        /*Я дико извиняюсь, но это сделано, чтобы можно было нормально разбить массив с координатами на 2 отдельных поля. 
-         Можно конечно постараться и обойтись без него, но придется переписывать половину функций*/
         _this.pointsToSend = {
             lats: [],
             longs: []
@@ -32089,10 +32087,10 @@ var YandexApiMap = function (_React$Component) {
         }
     }, {
         key: 'addPoint',
-        value: function addPoint(name, coord) {
+        value: function addPoint(coord) {
             this.setState({
                 points: this.state.points.concat([{
-                    coord: this.state.center
+                    coord: coord //сорян за такое
                 }])
             });
         }
@@ -32134,7 +32132,6 @@ var YandexApiMap = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 { className: 'map' },
-                _react2.default.createElement(_Field2.default, { addPoint: this.addPoint.bind(this) }),
                 _react2.default.createElement(
                     'div',
                     { className: 'app__points' },
@@ -32144,6 +32141,7 @@ var YandexApiMap = function (_React$Component) {
                     center: this.state.center,
                     points: this.state.points,
                     changePoint: this.changePoint.bind(this),
+                    addPoint: this.addPoint.bind(this),
                     changeMapCenter: this.changeMapCenter.bind(this)
                 }),
                 _react2.default.createElement(
@@ -32333,6 +32331,11 @@ var YMap = function (_Component) {
             this.props.changeMapCenter(e.originalEvent.target._yandexState._model.center);
         }
     }, {
+        key: 'addPoint',
+        value: function addPoint(e) {
+            this.props.addPoint(e.get('coords'));
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
@@ -32343,11 +32346,17 @@ var YMap = function (_Component) {
                     key: i,
                     geometry: item.coord,
                     properties: {
-                        hintContent: item.name,
-                        balloonContent: item.name
+                        balloonContent: 'darov',
+                        balloonContentHeader: 'header',
+                        hintContent: 'hint',
+                        iconContent: i
+
                     },
                     options: {
-                        draggable: true
+                        preset: "islands#darkOrangeIcon",
+                        draggable: true,
+                        openBalloonOnClick: true
+
                     },
 
                     onDragEnd: function onDragEnd(e) {
@@ -32366,7 +32375,7 @@ var YMap = function (_Component) {
                 null,
                 _react2.default.createElement(
                     _reactYandexMaps.Map,
-                    { state: mapState, onActionEnd: this.changeMapCenter.bind(this), width: 'auto' },
+                    { state: mapState, onActionEnd: this.changeMapCenter.bind(this), onClick: this.addPoint.bind(this), width: 'auto' },
                     pointsList
                 )
             );
