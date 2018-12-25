@@ -67,7 +67,7 @@ class Header extends React.Component {
                 <div className="main-header">
                     <h1>SharEvent</h1>
                     <nav>
-                        <Link to="/">Событие</Link>
+                        <Link to="/">События</Link>
                         <Link to="/about">Обо мне</Link>
                         <Link to="/map">Покажи карту</Link>
                         {addEventButton}

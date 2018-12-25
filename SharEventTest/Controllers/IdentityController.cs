@@ -64,10 +64,13 @@ namespace SharEventTest.Controllers
                     signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
+            var user = await _service.GetUser(model.Login);
+
             var response = new
             {
                 access_token = encodedJwt,
-                username = identity.Name
+                username = identity.Name,
+                userId = user.UserId
             };
 
             return Ok(response);
