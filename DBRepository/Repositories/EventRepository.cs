@@ -61,14 +61,30 @@ namespace DBRepository.Repositories
             var result = new List<Event<GeoPoint>>();
             using (var context = ContextFactory.CreateDbContext(ConnectionString))
             {
-              var tmp = (from em in context.EventMembers
-                          join e in context.Events
-                          on em.EventId equals e.EventId
-                          where em.UserId == userId && em.Status == true
-                          select e);
-
-              result = await tmp.ToListAsync();
                 // HERE
+                var tmp = (from em in context.EventMembers
+                           join e in context.Events
+                           on em.EventId equals e.EventId
+                           where em.UserId == userId && em.Status == true
+                           select e);
+
+                result = await tmp.ToListAsync();
+            }
+            return result;
+        }
+
+        public async Task<List<Event<GeoPoint>>> GetEventsJoinRequestsWhereMemberHasId(int userId)
+        {
+            var result = new List<Event<GeoPoint>>();
+            using (var context = ContextFactory.CreateDbContext(ConnectionString))
+            {
+                var tmp = (from em in context.EventMembers
+                           join e in context.Events
+                           on em.EventId equals e.EventId
+                           where em.UserId == userId && em.Status == false
+                           select e);
+
+                result = await tmp.ToListAsync();
             }
             return result;
         }

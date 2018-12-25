@@ -31,18 +31,25 @@ namespace SharEventTest.Controllers
 
         }
 
-        [Route("geteventsbycreatorlist")]
+        [Route("eventsByCreator")]
         [HttpGet]
         public async Task<List<Event<GeoPoint>>> GetEventsListByCreatorId(int userId)
         {
             return await eventRepository.GetEventsWhereAdminHasId(userId);
         }
 
-        [Route("geteventsbymemberlist")]
+        [Route("eventsByMember")]
         [HttpGet]
         public async Task<List<Event<GeoPoint>>> GetEventsListByMemberId(int userId)
         {
             return await eventRepository.GetEventsWhereMemberHasId(userId);
+        }
+
+        [Route("eventsJoinRequests")]
+        [HttpGet]
+        public async Task<List<Event<GeoPoint>>> GetEventsLoinRequestsListByMemberId(int userId)
+        {
+            return await eventRepository.GetEventsJoinRequestsWhereMemberHasId(userId);
         }
 
         //[Authorize]

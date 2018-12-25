@@ -9,8 +9,9 @@
             token_acc: '@Url.RouteUrl("DefaultApi", new {controller = "identity", action = "token" })',
             register: '@Url.RouteUrl("DefaultApi", new { controller = "identity", action = "register"})',
             addPointsToEvent: '@Url.RouteUrl("DefaultApi", new { controller = "event", action = "addpoints"})',
-            getEventsByCreatorList: '@Url.RouteUrl("DefaultApi", new { controller = "event", action = "geteventsbycreatorlist" })',
-            getEventsByMemberList: '@Url.RouteUrl("DefaultApi", new { controller = "event", action = "geteventsbymemberlist"})',
+            getEventsByCreatorList: '@Url.RouteUrl("DefaultApi", new { controller = "event", action = "eventsByCreator" })',
+            getEventsByMemberList: '@Url.RouteUrl("DefaultApi", new { controller = "event", action = "eventsByMember"})',
+            getEventsRequestsToJoinList: '@Url.RouteUrl("DefaultApi", new { controller = "event", action = "eventsJoinRequests"})',
             tokenKey: 'tokenKey',
             currentUserId: 'currentUserId'
 

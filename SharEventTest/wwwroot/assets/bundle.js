@@ -3450,6 +3450,7 @@ Object.defineProperty(exports, "__esModule", {
 var GET_EVENTS_CREATOR_LIST_SUCCESS = exports.GET_EVENTS_CREATOR_LIST_SUCCESS = 'GET_EVENTS_LIST_SUCCESS';
 var GET_EVENTS_CREATOR_LIST_ERROR = exports.GET_EVENTS_CREATOR_LIST_ERROR = 'GET_EVENTS_LIST_ERROR';
 var GET_EVENTS_MEMBER_LIST_SUCCESS = exports.GET_EVENTS_MEMBER_LIST_SUCCESS = 'GET_EVENTS_MEMBER_LIST_SUCCESS';
+var GET_EVENTS_JOIN_REQUESTS_LIST_SUCCESS = exports.GET_EVENTS_JOIN_REQUESTS_LIST_SUCCESS = 'GET_EVENTS_JOIN_REQUESTS_LIST_SUCCESS';
 
 /***/ }),
 /* 51 */
@@ -3483,7 +3484,7 @@ var _app = __webpack_require__(92);
 
 var _app2 = _interopRequireDefault(_app);
 
-var _configureStore = __webpack_require__(137);
+var _configureStore = __webpack_require__(138);
 
 var _configureStore2 = _interopRequireDefault(_configureStore);
 
@@ -30682,6 +30683,12 @@ var Header = function (_React$Component) {
             var registerForm = this.props.header.isRegisterFormShowed ? _react2.default.createElement(_registerForm2.default, { onRegister: this.props.register, login: this.props.header.regName, password: this.props.header.regPass, repeatPassword: this.props.header.regRepeatPass,
                 onChangeLogin: this.props.inputRegLogin, onChangePassword: this.props.inputRegPassword, onChangeRepeatPassword: this.props.inputRegRepeatPassword }) : '';
 
+            var eventsPageLink = this.props.header.isLogged ? _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/events' },
+                '\u0421\u043E\u0431\u044B\u0442\u0438\u044F'
+            ) : null;
+
             var addEventButton = this.props.header.isLogged ? _react2.default.createElement(
                 _reactRouterDom.Link,
                 { to: '/newevent', onClick: this.togglePopup.bind(this) },
@@ -30702,11 +30709,7 @@ var Header = function (_React$Component) {
                     _react2.default.createElement(
                         'nav',
                         null,
-                        _react2.default.createElement(
-                            _reactRouterDom.Link,
-                            { to: '/' },
-                            '\u0421\u043E\u0431\u044B\u0442\u0438\u044F'
-                        ),
+                        eventsPageLink,
                         _react2.default.createElement(
                             _reactRouterDom.Link,
                             { to: '/about' },
@@ -31654,15 +31657,19 @@ var _event = __webpack_require__(125);
 
 var _event2 = _interopRequireDefault(_event);
 
+var _home = __webpack_require__(127);
+
+var _home2 = _interopRequireDefault(_home);
+
 var _AddEventForm = __webpack_require__(47);
 
 var _AddEventForm2 = _interopRequireDefault(_AddEventForm);
 
-var _ymap = __webpack_require__(127);
+var _ymap = __webpack_require__(128);
 
 var _ymap2 = _interopRequireDefault(_ymap);
 
-var _EventsList = __webpack_require__(135);
+var _EventsList = __webpack_require__(136);
 
 var _EventsList2 = _interopRequireDefault(_EventsList);
 
@@ -31694,7 +31701,8 @@ var Routing = function (_React$Component) {
                     null,
                     _react2.default.createElement(_reactRouterDom.Route, { path: '/about', component: _about2.default }),
                     _react2.default.createElement(_reactRouterDom.Route, { path: '/map', component: _ymap2.default }),
-                    _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _EventsList2.default }),
+                    _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _home2.default }),
+                    _react2.default.createElement(_reactRouterDom.Route, { path: '/events', component: _EventsList2.default }),
                     _react2.default.createElement(_reactRouterDom.Route, { path: '/newevent', component: _AddEventForm2.default })
                 )
             );
@@ -31922,19 +31930,70 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Point = __webpack_require__(128);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Home = function (_React$Component) {
+    _inherits(Home, _React$Component);
+
+    function Home() {
+        _classCallCheck(this, Home);
+
+        return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
+    }
+
+    _createClass(Home, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                '\u0427\u0442\u043E\u0431\u044B \u043D\u0435 \u043F\u0430\u0434\u0430\u043B\u043E'
+            );
+        }
+    }]);
+
+    return Home;
+}(_react2.default.Component);
+
+exports.default = Home;
+;
+
+/***/ }),
+/* 128 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Point = __webpack_require__(129);
 
 var _Point2 = _interopRequireDefault(_Point);
 
-var _Field = __webpack_require__(129);
+var _Field = __webpack_require__(130);
 
 var _Field2 = _interopRequireDefault(_Field);
 
-var _Map = __webpack_require__(130);
+var _Map = __webpack_require__(131);
 
 var _Map2 = _interopRequireDefault(_Map);
 
-var _queryString = __webpack_require__(131);
+var _queryString = __webpack_require__(132);
 
 var _queryString2 = _interopRequireDefault(_queryString);
 
@@ -31942,7 +32001,7 @@ var _reactRouterDom = __webpack_require__(9);
 
 var _reactYandexMaps = __webpack_require__(26);
 
-var _ymapbb = __webpack_require__(134);
+var _ymapbb = __webpack_require__(135);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32111,7 +32170,7 @@ exports.default = YandexApiMap;
 ;
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32174,7 +32233,7 @@ var Point = function (_Component) {
 exports.default = Point;
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32228,7 +32287,7 @@ var Field = function (_Component) {
 exports.default = Field;
 
 /***/ }),
-/* 130 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32320,14 +32379,14 @@ var YMap = function (_Component) {
 exports.default = YMap;
 
 /***/ }),
-/* 131 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var strictUriEncode = __webpack_require__(132);
+var strictUriEncode = __webpack_require__(133);
 var objectAssign = __webpack_require__(6);
-var decodeComponent = __webpack_require__(133);
+var decodeComponent = __webpack_require__(134);
 
 function encoderForArrayFormat(opts) {
 	switch (opts.arrayFormat) {
@@ -32551,7 +32610,7 @@ exports.parseUrl = function (str, opts) {
 
 
 /***/ }),
-/* 132 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32564,7 +32623,7 @@ module.exports = function (str) {
 
 
 /***/ }),
-/* 133 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32665,7 +32724,7 @@ module.exports = function (encodedURI) {
 
 
 /***/ }),
-/* 134 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32737,7 +32796,7 @@ exports.default = YandexApiTest;
 ;
 
 /***/ }),
-/* 135 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32763,7 +32822,7 @@ var _reactRouterDom = __webpack_require__(9);
 
 var _reactRedux = __webpack_require__(11);
 
-var _eventsListActions = __webpack_require__(136);
+var _eventsListActions = __webpack_require__(137);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32787,6 +32846,7 @@ var EventsList = function (_React$Component) {
         value: function componentDidMount() {
             this.props.getEventsByCreator();
             this.props.getEventsByMember();
+            this.props.getEventsRequestsToJoin();
         }
     }, {
         key: 'render',
@@ -32835,6 +32895,38 @@ var EventsList = function (_React$Component) {
                 );
             });
 
+            var requestsList = this.props.eventsList.eventsJoinRequests.map(function (item) {
+                return _react2.default.createElement(
+                    'div',
+                    { key: item.eventId, className: 'event' },
+                    _react2.default.createElement(
+                        'div',
+                        { value: 'eventName' },
+                        ' EventId: ',
+                        item.eventId,
+                        ' \u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435: ',
+                        item.eventName,
+                        ' '
+                    ),
+                    _react2.default.createElement(
+                        'button',
+                        null,
+                        'Accept'
+                    ),
+                    _react2.default.createElement(
+                        'button',
+                        null,
+                        'Decline'
+                    ),
+                    _react2.default.createElement(
+                        _reactRouterDom.Link,
+                        { to: '/map?eventId' + item.eventId },
+                        ' \u0422\u044B\u043A '
+                    ),
+                    _react2.default.createElement('hr', null)
+                );
+            });
+
             return _react2.default.createElement(
                 'div',
                 { id: 'event' },
@@ -32857,6 +32949,7 @@ var EventsList = function (_React$Component) {
                     null,
                     ' \u0412\u0445\u043E\u0434\u044F\u0449\u0438\u0435 \u0437\u0430\u043F\u0440\u043E\u0441\u044B '
                 ),
+                requestsList,
                 '//\u0441\u043F\u0438\u0441\u043E\u043A \u0438\u0432\u0435\u043D\u0442\u043E\u0432 \u0441 \u043B\u0438\u043D\u043A\u0430\u043C\u0438 \u0438 \u0441 \u043A\u043D\u043E\u043F\u043A\u0430\u043C\u0438 accept-decline'
             );
         }
@@ -32880,6 +32973,9 @@ var mapDispatch = function mapDispatch(dispatch) {
         },
         getEventsByMember: function getEventsByMember() {
             return dispatch((0, _eventsListActions.getEventsByMember)());
+        },
+        getEventsRequestsToJoin: function getEventsRequestsToJoin() {
+            return dispatch((0, _eventsListActions.getEventsRequestsToJoin)());
         }
     };
 };
@@ -32887,7 +32983,7 @@ var mapDispatch = function mapDispatch(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapProps, mapDispatch)(EventsList);
 
 /***/ }),
-/* 136 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32898,9 +32994,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.receiveEventsByCreatorList = receiveEventsByCreatorList;
 exports.receiveEventsByMemberList = receiveEventsByMemberList;
+exports.receiveEventsJoinRequestsList = receiveEventsJoinRequestsList;
 exports.errorsReceive = errorsReceive;
 exports.getEventsByCreator = getEventsByCreator;
 exports.getEventsByMember = getEventsByMember;
+exports.getEventsRequestsToJoin = getEventsRequestsToJoin;
 
 var _eventsListConstants = __webpack_require__(50);
 
@@ -32926,6 +33024,13 @@ function receiveEventsByMemberList(data) {
     };
 }
 
+function receiveEventsJoinRequestsList(data) {
+    return {
+        type: _eventsListConstants.GET_EVENTS_JOIN_REQUESTS_LIST_SUCCESS,
+        events: data
+    };
+}
+
 function errorsReceive(error) {
     return {
         type: _eventsListConstants.GET_EVENTS_CREATOR_LIST_ERROR,
@@ -32935,13 +33040,7 @@ function errorsReceive(error) {
 
 function getEventsByCreator() {
     return function (dispatch) {
-        var queryTrailer = '?userId=';
-        /* костыль, который надо убрать в конечной версии */
-        if (_auth2.default.isLogged() == false) {
-            queryTrailer += '1';
-        } else {
-            queryTrailer += _auth2.default.getUserId();
-        }
+        var queryTrailer = '?userId=' + _auth2.default.getUserId();
         fetch(constants.getEventsByCreatorList + queryTrailer).then(function (response) {
             return response.json();
         }).then(function (data) {
@@ -32954,13 +33053,7 @@ function getEventsByCreator() {
 
 function getEventsByMember() {
     return function (dispatch) {
-        var queryTrailer = '?userId=';
-        /* костыль, который надо убрать в конечной версии */
-        if (_auth2.default.isLogged() == false) {
-            queryTrailer += '1';
-        } else {
-            queryTrailer += _auth2.default.getUserId();
-        }
+        var queryTrailer = '?userId=' + _auth2.default.getUserId();
         fetch(constants.getEventsByMemberList + queryTrailer).then(function (response) {
             return response.json();
         }).then(function (data) {
@@ -32971,8 +33064,22 @@ function getEventsByMember() {
     };
 }
 
+function getEventsRequestsToJoin() {
+    return function (dispatch) {
+        var queryTrailer = '?userId=' + _auth2.default.getUserId();
+
+        fetch(constants.getEventsRequestsToJoinList + queryTrailer).then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            dispatch(receiveEventsJoinRequestsList(data));
+        }).catch(function (ex) {
+            dispatch(errorsReceive(ex));
+        });
+    };
+}
+
 /***/ }),
-/* 137 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32985,7 +33092,7 @@ exports.default = configureStore;
 
 var _redux = __webpack_require__(5);
 
-var _mainReducer = __webpack_require__(138);
+var _mainReducer = __webpack_require__(139);
 
 var _mainReducer2 = _interopRequireDefault(_mainReducer);
 
@@ -33009,7 +33116,7 @@ function configureStore(initialState) {
 }
 
 /***/ }),
-/* 138 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33021,15 +33128,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(5);
 
-var _eventReducer = __webpack_require__(139);
+var _eventReducer = __webpack_require__(140);
 
 var _eventReducer2 = _interopRequireDefault(_eventReducer);
 
-var _headerReducer = __webpack_require__(140);
+var _headerReducer = __webpack_require__(141);
 
 var _headerReducer2 = _interopRequireDefault(_headerReducer);
 
-var _eventsListReducer = __webpack_require__(141);
+var _eventsListReducer = __webpack_require__(142);
 
 var _eventsListReducer2 = _interopRequireDefault(_eventsListReducer);
 
@@ -33042,7 +33149,7 @@ exports.default = (0, _redux.combineReducers)({
 });
 
 /***/ }),
-/* 139 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33080,7 +33187,7 @@ function event() {
 }
 
 /***/ }),
-/* 140 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33164,7 +33271,7 @@ function header() {
 }
 
 /***/ }),
-/* 141 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33183,6 +33290,7 @@ var _eventsListConstants = __webpack_require__(50);
 var initialState = {
     eventsByCreatorList: [],
     eventsByMemberList: [],
+    eventsJoinRequests: [],
     error: ''
 };
 
@@ -33196,6 +33304,9 @@ function eventsList() {
 
         case _eventsListConstants.GET_EVENTS_MEMBER_LIST_SUCCESS:
             return _extends({}, state, { eventsByMemberList: action.events, error: 'Success' });
+
+        case _eventsListConstants.GET_EVENTS_JOIN_REQUESTS_LIST_SUCCESS:
+            return _extends({}, state, { eventsJoinRequests: action.events, error: 'Success' });
 
         case _eventsListConstants.GET_EVENTS_CREATOR_LIST_ERROR:
             return _extends({}, state, { error: action.error });

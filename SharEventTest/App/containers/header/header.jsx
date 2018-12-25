@@ -55,10 +55,16 @@ class Header extends React.Component {
                 onChangeLogin={this.props.inputRegLogin} onChangePassword={this.props.inputRegPassword} onChangeRepeatPassword={this.props.inputRegRepeatPassword} />
             : '';
 
+        let eventsPageLink = this.props.header.isLogged ?
+            <Link to="/events">События</Link>
+            : null;
+
 
         let addEventButton = this.props.header.isLogged ?
             < Link to="/newevent" onClick={this.togglePopup.bind(this)} > Добавить событие </Link>
             : null;
+
+        
 
         
         
@@ -67,7 +73,8 @@ class Header extends React.Component {
                 <div className="main-header">
                     <h1>SharEvent</h1>
                     <nav>
-                        <Link to="/">События</Link>
+                        
+                        {eventsPageLink}
                         <Link to="/about">Обо мне</Link>
                         <Link to="/map">Покажи карту</Link>
                         {addEventButton}
