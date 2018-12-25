@@ -17,7 +17,7 @@ class EventsList extends React.Component {
             return (
                 <div key={item.eventId} className="event">
                     <div value="eventName"> EventId: {item.eventId} Название: {item.eventName} </div>
-                    <Link to={`/event/${item.eventId}`}> Тык </Link>
+                    <Link to={`/map?eventId=${item.eventId}`}> Тык </Link>
                     <hr />
                 </div>
             );
@@ -27,7 +27,7 @@ class EventsList extends React.Component {
             return (
                 <div key={item.eventId} className="event">
                     <div value="eventName"> EventId: {item.eventId} Название: {item.eventName} </div>
-                    <Link to={`/event/${item.eventId}`}> Тык </Link>
+                    <Link to={`/map?eventId=${item.eventId}`}> Тык </Link>
                     <hr />
                 </div>
             );

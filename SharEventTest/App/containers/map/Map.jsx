@@ -17,6 +17,7 @@ class YMap extends Component {
 
 
     render() {
+
        
         // это пока не юзается, но потом будет отмечать метки
         const pointsList = this.props.points.map((item, i) =>

@@ -61,6 +61,13 @@ namespace DBRepository.Repositories
             var result = new List<Event<GeoPoint>>();
             using (var context = ContextFactory.CreateDbContext(ConnectionString))
             {
+              var tmp = (from em in context.EventMembers
+                          join e in context.Events
+                          on em.EventId equals e.EventId
+                          where em.UserId == userId && em.Status == true
+                          select e);
+
+              result = await tmp.ToListAsync();
                 // HERE
             }
             return result;
