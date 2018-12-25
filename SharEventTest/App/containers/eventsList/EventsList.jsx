@@ -3,16 +3,17 @@ import ReactDOM from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getEvents } from './eventsListActions.jsx';
+import { getEventsByCreator, getEventsByMember } from './eventsListActions.jsx';
 
 class EventsList extends React.Component {
 
     componentDidMount() {
-        this.props.getEvents();
+        this.props.getEventsByCreator();
+        this.props.getEventsByMember();
     }
 
     render() {
-        let listCreator = this.props.eventsList.data.map(item => {
+        let listCreator = this.props.eventsList.eventsByCreatorList.map(item => {
             return (
                 <div key={item.eventId} className="event">
                     <div value="eventName"> EventId: {item.eventId} Название: {item.eventName} </div>
@@ -21,6 +22,16 @@ class EventsList extends React.Component {
                 </div>
             );
         });
+
+        let listMember = this.props.eventsList.eventsByMemberList.map(item => {
+            return (
+                <div key={item.eventId} className="event">
+                    <div value="eventName"> EventId: {item.eventId} Название: {item.eventName} </div>
+                    <Link to={`/event/${item.eventId}`}> Тык </Link>
+                    <hr />
+                </div>
+            );
+        })
 
         return (
             <div id="event">
@@ -31,6 +42,7 @@ class EventsList extends React.Component {
 
                 <h2> Я участник </h2>
                 //список ивентов с линками, где залогиненный юзер - участник
+                {listMember}
                 <h2> Входящие запросы </h2>
                 //список ивентов с линками и с кнопками accept-decline 
             </div>
@@ -46,7 +58,8 @@ let mapProps = (state) => {
 
 let mapDispatch = (dispatch) => {
     return {
-        getEvents: () => dispatch(getEvents())
+        getEventsByCreator: () => dispatch(getEventsByCreator()),
+        getEventsByMember: () => dispatch(getEventsByMember())
     }
 }
 

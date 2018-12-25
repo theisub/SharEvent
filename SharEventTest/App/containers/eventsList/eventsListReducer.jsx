@@ -1,16 +1,20 @@
-﻿import { GET_EVENTS_LIST_SUCCESS, GET_EVENTS_LIST_ERROR } from './eventsListConstants.jsx';
+﻿import { GET_EVENTS_CREATOR_LIST_SUCCESS, GET_EVENTS_MEMBER_LIST_SUCCESS, GET_EVENTS_CREATOR_LIST_ERROR } from './eventsListConstants.jsx';
 
 const initialState = {
-    data: [],
+    eventsByCreatorList: [],
+    eventsByMemberList: [],
     error: ''
 }
 
 export default function eventsList(state = initialState, action) {
     switch (action.type) {
-        case GET_EVENTS_LIST_SUCCESS:
-            return { ...state, data: action.events, error: 'Success' }
+        case GET_EVENTS_CREATOR_LIST_SUCCESS:
+            return { ...state, eventsByCreatorList: action.events, error: 'Success' }
 
-        case GET_EVENTS_LIST_ERROR:
+        case GET_EVENTS_MEMBER_LIST_SUCCESS:
+            return { ...state, eventsByMemberList: action.events, error: 'Success' }
+
+        case GET_EVENTS_CREATOR_LIST_ERROR:
             return { ...state, error: action.error }
 
         default:

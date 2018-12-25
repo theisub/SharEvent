@@ -17,7 +17,6 @@ namespace DBRepository
         public DbSet<User> Users { get; set; } 
         public DbSet<GeoPoint> GeoPoints { get; set; }
         public DbSet<Event<GeoPoint>> Events { get; set; }
-
-
+        public DbSet<EventMember> EventMembers { get; set; }
     }
 }
