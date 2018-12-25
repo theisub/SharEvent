@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import Auth from '../../utilities/auth'
 
 
 export default class AddEventForm extends React.Component{
@@ -7,6 +8,7 @@ export default class AddEventForm extends React.Component{
         super(props);
         this.state =
         {
+            adminId: Auth.getUserId(),
             eventName: '',
             eventDescription: '',
             eventUrl: ''
